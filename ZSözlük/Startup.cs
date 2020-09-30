@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ZSözlük.Contexts;
+using ZSözlük.Repository;
 
 namespace ZSözlük
 {
@@ -27,6 +28,9 @@ namespace ZSözlük
         {
             services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer("server=.\\SQLEXPRESS;database=ZSozlukDb;integrated security=true;"));
             services.AddControllersWithViews();
+
+            services.AddScoped<KonuRepository,KonuRepository>();
+            services.AddScoped<IcerikRepository,IcerikRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

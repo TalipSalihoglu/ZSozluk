@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Anasayfa";
+}
+<div class="row">
+    <div class="col-md-3">
+         @await Component.InvokeAsync("KonuList")
+    </div>
+    <div class="col-md-7">
+        @await Component.InvokeAsync("IcerikList", new { KonuId = ViewBag.konuid })
+    </div>
+</div>
