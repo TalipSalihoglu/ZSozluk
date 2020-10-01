@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ZSözlük.Entities;
 using ZSözlük.Repository;
 
 namespace ZSözlük.Controllers
@@ -10,9 +11,11 @@ namespace ZSözlük.Controllers
     public class SozlukController : Controller
     {
         private readonly KonuRepository _konuRepository;
-        public SozlukController(KonuRepository konuRepository)
+        private readonly IcerikRepository _icerikRepository;
+        public SozlukController(KonuRepository konuRepository,IcerikRepository icerikRepository)
         {
             _konuRepository = konuRepository;
+            _icerikRepository = icerikRepository;
         }
         public IActionResult Index(int? Konuid)
         {
@@ -27,6 +30,18 @@ namespace ZSözlük.Controllers
             
             return View();
 
+        }
+        public IActionResult IcerikEkle(Icerik model)
+        {
+            if (ModelState.IsValid)
+            {
+                Icerik yeniicerik = new Icerik();
+                yeniicerik.IcerikFull = model.IcerikFull;
+                yeniicerik.KonuID = model.KonuID;
+                _icerikRepository.Ekle(model);
+                return RedirectToAction("Index");
+            }
+            return View("Index",model);
         }
     }
 }

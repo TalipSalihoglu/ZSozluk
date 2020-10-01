@@ -1,11 +1,39 @@
-﻿@{
+﻿@model Icerik
+
+@{
     ViewBag.Title = "Anasayfa";
 }
 <div class="row">
     <div class="col-md-3">
-         @await Component.InvokeAsync("KonuList")
+        @await Component.InvokeAsync("KonuList")
     </div>
     <div class="col-md-7">
+        @if (ViewBag.konuid > 0)
+        {
+            <form method="post" enctype="multipart/form-data" asp-action="IcerikEkle" asp-controller="Sozluk">
+                <div class="container mt-3 shadow-lg">
+                    <div class="form-group">
+                        <textarea asp-for="KonuID" class="form-control" hidden></textarea>
+                        <textarea asp-for="IcerikFull" class="form-control" placeholder="Fikirler Paylaştıkça Çoğalır"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Paylas" class="btn btn-success" />
+                    </div>
+                    <br />
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">En Son Paylaşılanlar</h1>
+                    <p class="lead">Bu Sayfada Tüm Konularda En Son Paylaşılanlar Var </p>
+                </div>
+            </div>
+        }
+        <br />
         @await Component.InvokeAsync("IcerikList", new { KonuId = ViewBag.konuid })
+
     </div>
 </div>
