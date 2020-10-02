@@ -43,5 +43,16 @@ namespace ZSözlük.Controllers
             }
             return View("Index",model);
         }
+        public IActionResult KonuEkle(Konu model)
+        {
+            if (ModelState.IsValid)
+            {
+                Konu yeniKonu = new Konu();
+                yeniKonu.KonuBaslık = model.KonuBaslık;
+                _konuRepository.Ekle(yeniKonu);
+                return RedirectToAction("Index");
+            }
+            return View("Index", model);
+        }
     }
 }

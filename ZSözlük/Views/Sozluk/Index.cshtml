@@ -5,7 +5,9 @@
 }
 <div class="row">
     <div class="col-md-3">
+        <partial name="_YeniKonu" />
         @await Component.InvokeAsync("KonuList")
+
     </div>
     <div class="col-md-7">
         @if (ViewBag.konuid > 0)

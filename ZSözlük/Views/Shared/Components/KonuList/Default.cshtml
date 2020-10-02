@@ -1,11 +1,10 @@
 ﻿@model List<Konu>
-
     <div class="list-group">
 
-
         <a asp-action="Index" asp-controller="Sozluk" class="list-group-item list-group-item-action @(ViewBag.konuid==null?"active":"")">
-           Tüm Başlıklar
+            Tüm Başlıklar
         </a>
+
 
         @foreach (var item in Model)
         {

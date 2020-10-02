@@ -20,5 +20,10 @@ namespace ZSözlük.Repository
             var list = await _context.Konular.ToListAsync();
             return list;
         }
+        public void Ekle(Konu konu) 
+        {
+            _context.Add(konu);
+            _context.SaveChanges();
+        }
     }
 }
