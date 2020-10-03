@@ -43,6 +43,15 @@ namespace ZSözlük.Controllers
             }
             return View("Index",model);
         }
+
+        [HttpGet]
+        public IActionResult KonuEkle() 
+        {
+            var konu = new Konu();
+            return PartialView("KonuEkle", konu);
+        }
+ 
+        [HttpPost]
         public IActionResult KonuEkle(Konu model)
         {
             if (ModelState.IsValid)
@@ -52,7 +61,7 @@ namespace ZSözlük.Controllers
                 _konuRepository.Ekle(yeniKonu);
                 return RedirectToAction("Index");
             }
-            return View("Index", model);
+            return PartialView("KonuEkle",model);
         }
     }
 }

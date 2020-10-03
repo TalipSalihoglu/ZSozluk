@@ -9,6 +9,7 @@ namespace ZSözlük.Entities
     public class Konu
     {
         public int KonuID { get; set; }
+        [Required]
         [MaxLength(75)]
         public string KonuBaslık { get; set; }
         public List<Icerik> Icerikler { get; set; }

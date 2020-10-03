@@ -5,7 +5,13 @@
 }
 <div class="row">
     <div class="col-md-3">
-        <partial name="_YeniKonu" />
+
+        <div id="PlaceHolderHere"></div>
+
+        <div class="text-md-right">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#KonuEkle" data-url="@Url.Action("KonuEkle")">Konu Ekle</button>
+        </div>
+
         @await Component.InvokeAsync("KonuList")
 
     </div>
@@ -39,3 +45,4 @@
 
     </div>
 </div>
+
