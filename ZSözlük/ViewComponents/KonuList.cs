@@ -16,7 +16,7 @@ namespace ZSözlük.ViewComponents
             _konuRepository = konuRepository;
         }
         public async Task<IViewComponentResult> InvokeAsync()
-        {
+        {           
             var result = await _konuRepository.GetirHepsiKonu();
             return View(result);
         }

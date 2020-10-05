@@ -28,6 +28,7 @@ namespace ZSözlük.Repository
         }
         public void Ekle(Icerik model) 
         {
+            model.IcerikTarih = DateTime.Now;
             _zSozlukContext.Add(model);
             _zSozlukContext.SaveChanges();
         }

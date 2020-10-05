@@ -9,10 +9,11 @@ namespace ZSözlük.Entities
     public class Icerik
     {
         public int IcerikID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Bu alan doldurulmadan paylaşılamaz")]
         public string IcerikFull{ get; set; }
         [Required]
         public int KonuID { get; set; }
+        public DateTime IcerikTarih { get; set; }
         public virtual Konu Konu { get; set; }
 
     }

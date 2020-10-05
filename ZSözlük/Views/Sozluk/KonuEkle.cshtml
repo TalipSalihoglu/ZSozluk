@@ -13,13 +13,14 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <form asp-action="KonuEkle">
-                            <div asp-validation-summary="All" class="control-label"></div>
-                            <input type="hidden" asp-for="KonuID" />
-                            <div class="form-group">                              
-                                    <input asp-for="KonuBaslık" class="form-control w-100" />
-                                    <span asp-validation-for="KonuBaslık" class="text-danger"></span>                           
+                            <div class="container mt-3">                               
+                                <input type="hidden" asp-for="KonuID" />
+                                <div class="form-group">
+                                    <input asp-for="KonuBaslık" class="form-control" placeholder="Yeni Bir Tartışma Konusu Yaz" />
+                                    <span asp-validation-for="@Model.KonuBaslık" class="text-danger"></span>
+                                </div>
                             </div>
                         </form>
                     </div>

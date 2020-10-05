@@ -31,12 +31,20 @@ namespace ZSözlük.Controllers
             return View();
 
         }
+        [HttpGet]
+        public IActionResult IcerikEkle()
+        {
+            var icerik = new Icerik();
+            return View("Index",icerik);
+        }
+        [HttpPost]
         public IActionResult IcerikEkle(Icerik model)
         {
+            ViewBag.konuid = model.KonuID;
             if (ModelState.IsValid)
             {
                 Icerik yeniicerik = new Icerik();
-                yeniicerik.IcerikFull = model.IcerikFull;
+                yeniicerik.IcerikFull = model.IcerikFull;             
                 yeniicerik.KonuID = model.KonuID;
                 _icerikRepository.Ekle(model);
                 return RedirectToAction("Index");
