@@ -4,6 +4,7 @@
 
     ViewBag.Title = "Anasayfa";
 }
+
 <div class="row">
 
     <div class="col-md-3">
@@ -13,7 +14,7 @@
         </div>
         <div id="PlaceHolderHere"></div>
 
-            @await Component.InvokeAsync("KonuList")
+        @await Component.InvokeAsync("KonuList")
 
     </div>
 
@@ -49,3 +50,7 @@
     </div>
 </div>
 
+@section Scripts{
+    <script src="~/jqueryValid/jquery.validate.min.js"></script>
+    <script src="~/jqueryUnob/jquery.validate.unobtrusive.min.js"></script>
+}

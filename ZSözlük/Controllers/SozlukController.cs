@@ -70,6 +70,9 @@ namespace ZSözlük.Controllers
                 return RedirectToAction("Index");
             }
             return PartialView("KonuEkle",model);
+            //return View(model);
+            //return RedirectToAction("KonuEkle", model);
+
         }
     }
 }

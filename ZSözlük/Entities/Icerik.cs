@@ -9,7 +9,7 @@ namespace ZSözlük.Entities
     public class Icerik
     {
         public int IcerikID { get; set; }
-        [Required(ErrorMessage ="Bu alan doldurulmadan paylaşılamaz")]
+        [Required(ErrorMessage ="Bu alan boş bırakılamaz")]
         public string IcerikFull{ get; set; }
         [Required]
         public int KonuID { get; set; }
