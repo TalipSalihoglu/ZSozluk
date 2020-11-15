@@ -9,10 +9,12 @@
 
     <div class="col-md-3">
 
-        <div class="text-md-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#KonuEkle" data-url="@Url.Action("KonuEkle")">Konu Ekle</button>
+        <div class="container">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form">
+               Konu Ekle
+            </button>
         </div>
-        <div id="PlaceHolderHere"></div>
+        <partial name="KonuEkle" />
 
         @await Component.InvokeAsync("KonuList")
 

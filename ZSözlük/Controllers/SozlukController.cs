@@ -69,10 +69,7 @@ namespace ZSözlük.Controllers
                 _konuRepository.Ekle(yeniKonu);
                 return RedirectToAction("Index");
             }
-            return PartialView("KonuEkle",model);
-            //return View(model);
-            //return RedirectToAction("KonuEkle", model);
-
+            return PartialView("KonuEkle", model);           
         }
     }
 }
