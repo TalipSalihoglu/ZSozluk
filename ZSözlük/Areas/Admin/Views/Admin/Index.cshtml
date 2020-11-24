@@ -1,0 +1,25 @@
+﻿@using ZSözlük.Entities
+@model List<Icerik>
+
+<h1> Admin Paneli </h1>
+
+<table class="table table-bordered table-hover mt-2">
+    <tr>
+        <th>içerik ıd </th>
+        <th>konu </th>
+        <th>içerik </th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.IcerikID</td>
+            <td>@item.KonuID</td>
+            <td>@item.IcerikFull</td>
+            <td>
+                <a class="btn btn-block btn-danger text-dark"> Sil </a>
+            </td>
+        </tr>
+    }
+</table>
+
