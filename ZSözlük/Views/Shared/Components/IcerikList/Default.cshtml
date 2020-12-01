@@ -1,4 +1,4 @@
-﻿@model List<Icerik>
+﻿@model PaginatedListModel<Icerik>
 
 
 @if (Model.Count > 0)
@@ -18,6 +18,21 @@
                 </div>
             </div>
         }
+
+<br />   
+     
+<div class="border-primary text-center">
+    @{
+        var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.NextPage ? "disabled" : "";
+    }
+
+    <a  asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Previous</a>
+    <a  asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Next</a>
+</div>
+
+<br />
+
 }
 else
 {

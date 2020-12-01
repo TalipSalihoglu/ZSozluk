@@ -47,7 +47,7 @@
             </div>
         }
         <br />
-        @await Component.InvokeAsync("IcerikList", new { KonuId = ViewBag.konuid })
+        @await Component.InvokeAsync("IcerikList", new { KonuId = ViewBag.konuid , pageNumber=ViewBag.pageNumber })
 
     </div>
 </div>

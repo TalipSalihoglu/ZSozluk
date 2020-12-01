@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ZSözlük.Entities;
+using ZSözlük.Models.ViewModel;
 using ZSözlük.Repository;
 
 namespace ZSözlük.Areas.Admin.Controllers
@@ -15,9 +17,10 @@ namespace ZSözlük.Areas.Admin.Controllers
         {
             _ıcerikRepository = icerikRepository;
         }
-        public async Task<IActionResult> Index()
-        {         
-            return View(await _ıcerikRepository.GetirİcerikHepsi());
+        public async Task<IActionResult> Index(int pageNumber = 1)
+        {
+            var list = _ıcerikRepository.GetirİcerikHepsi();            
+            return View(await PaginatedListModel<Icerik>.CreateAsync(list, pageNumber,10));
         }
     }
 }

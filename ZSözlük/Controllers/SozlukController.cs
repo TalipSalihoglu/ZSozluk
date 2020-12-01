@@ -17,17 +17,17 @@ namespace ZSözlük.Controllers
             _konuRepository = konuRepository;
             _icerikRepository = icerikRepository;
         }
-        public IActionResult Index(int? Konuid)
+        public IActionResult Index(int? Konuid,int pageNumber=1)
         {
             if (Konuid.HasValue)
             {
-                ViewBag.konuid = (int)Konuid;
+                ViewBag.konuid = (int)Konuid;                
             }
             else
             {
                 ViewBag.konuid = Konuid;
             }
-            
+            ViewBag.pageNumber = pageNumber;
             return View();
 
         }

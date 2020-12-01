@@ -1,5 +1,6 @@
 ﻿@using ZSözlük.Entities
-@model List<Icerik>
+@using ZSözlük.Models.ViewModel
+@model PaginatedListModel<Icerik>  // List<Icerik>
 
 <h1> Admin Paneli </h1>
 
@@ -17,9 +18,17 @@
             <td>@item.KonuID</td>
             <td>@item.IcerikFull</td>
             <td>
-                <a class="btn btn-block btn-danger text-dark"> Sil </a>
+                <a class="btn btn-sm btn-outline-danger text-dark"> Sil </a>
             </td>
         </tr>
     }
 </table>
 
+
+@{
+    var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.NextPage ? "disabled" : "";
+}
+
+<a asp-area="Admin" asp-controller="Admin" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Previous</a>
+<a asp-area="Admin" asp-controller="Admin" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Next</a>
