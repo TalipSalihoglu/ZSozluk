@@ -18,7 +18,7 @@
             <td>@item.KonuID</td>
             <td>@item.IcerikFull</td>
             <td>
-                <a class="btn btn-sm btn-outline-danger text-dark"> Sil </a>
+                <a asp-action="DeleteIcerik" asp-route-id=@item.IcerikID class="btn btn-sm btn-outline-danger text-dark"> Sil </a>
             </td>
         </tr>
     }

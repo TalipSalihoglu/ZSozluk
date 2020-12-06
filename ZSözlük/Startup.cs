@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ZSözlük.Contexts;
-using ZSözlük.Repository;
+using ZSözlük.IRepositories;
+using ZSözlük.Services;
 
 namespace ZSözlük
 {
@@ -29,8 +25,13 @@ namespace ZSözlük
             services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer("server=.\\SQLEXPRESS;database=ZSozlukDb;integrated security=true;"));
             services.AddControllersWithViews();
 
-            services.AddScoped<KonuRepository,KonuRepository>();
-            services.AddScoped<IcerikRepository,IcerikRepository>();
+           //services.AddScoped<KonuRepository,KonuRepository>();
+           //services.AddScoped<IcerikRepository,IcerikRepository>();
+
+           services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+           services.AddScoped<IIcerikService, IcerikService>();
+           services.AddScoped<IKonuService, KonuService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

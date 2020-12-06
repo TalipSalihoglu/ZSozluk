@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ZSözlük.Repository;
-using ZSözlük.Entities;
+using ZSözlük.Services;
 
 namespace ZSözlük.ViewComponents
 {
     public class KonuList : ViewComponent
     {
-        private readonly KonuRepository _konuRepository;
-        public KonuList(KonuRepository konuRepository)
+        private readonly IKonuService _konuService;
+        public KonuList(IKonuService konuService)
         {
-            _konuRepository = konuRepository;
+            _konuService = konuService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
-        {           
-            var result = await _konuRepository.GetirHepsiKonu();
+        {
+            //var result = await _konuRepository.GetirHepsiKonu();
+            var result = await _konuService.GetAllKonu();
             return View(result);
         }
     }

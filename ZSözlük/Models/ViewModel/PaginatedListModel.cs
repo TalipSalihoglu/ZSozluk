@@ -11,7 +11,7 @@ namespace ZSözlük.Models.ViewModel
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
 
-        public PaginatedListModel(List<T> items, int count, int pageIndex, int pageSize)
+        public PaginatedListModel(IEnumerable<T> items, int count, int pageIndex, int pageSize) //list --> IEnumerable olarak değişti..
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageIndex);
@@ -32,10 +32,10 @@ namespace ZSözlük.Models.ViewModel
                 return (PageIndex < TotalPages);
             }
         }
-        public static async Task<PaginatedListModel<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedListModel<T>> CreateAsync(IEnumerable<T> source, int pageIndex, int pageSize)
         {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var count =  source.Count();   //CountAsync();
+            var items =  source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList(); //ToListAsync();
             return new PaginatedListModel<T>(items, count, pageIndex, pageSize);
         }
     }

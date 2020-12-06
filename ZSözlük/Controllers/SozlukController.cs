@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using ZSözlük.Entities;
-using ZSözlük.Repository;
+using ZSözlük.Services;
 
 namespace ZSözlük.Controllers
 {
     public class SozlukController : Controller
     {
-        private readonly KonuRepository _konuRepository;
-        private readonly IcerikRepository _icerikRepository;
-        public SozlukController(KonuRepository konuRepository,IcerikRepository icerikRepository)
+        //private readonly KonuRepository _konuRepository;
+        //private readonly IcerikRepository _icerikRepository;       
+        private readonly IIcerikService _icerikService;       
+        private readonly IKonuService _konuService;       
+
+        public SozlukController( IIcerikService icerikService, IKonuService konuService)//KonuRepository konuRepository,IcerikRepository icerikRepository,
         {
-            _konuRepository = konuRepository;
-            _icerikRepository = icerikRepository;
+           // _konuRepository = konuRepository;
+           // _icerikRepository = icerikRepository;
+            _icerikService = icerikService;
+            _konuService = konuService;
         }
         public IActionResult Index(int? Konuid,int pageNumber=1)
         {
@@ -38,7 +40,7 @@ namespace ZSözlük.Controllers
             return View("Index",icerik);
         }
         [HttpPost]
-        public IActionResult IcerikEkle(Icerik model)
+        public async Task<IActionResult> IcerikEkle(Icerik model)
         {
             ViewBag.konuid = model.KonuID;
             if (ModelState.IsValid)
@@ -46,7 +48,8 @@ namespace ZSözlük.Controllers
                 Icerik yeniicerik = new Icerik();
                 yeniicerik.IcerikFull = model.IcerikFull;             
                 yeniicerik.KonuID = model.KonuID;
-                _icerikRepository.Ekle(model);
+                //_icerikRepository.Ekle(model);
+                await _icerikService.CreateIcerik(model);
                 return RedirectToAction("Index");
             }
             return View("Index",model);
@@ -60,13 +63,14 @@ namespace ZSözlük.Controllers
         }
  
         [HttpPost]
-        public IActionResult KonuEkle(Konu model)
+        public async Task<IActionResult> KonuEkle(Konu model)
         {
             if (ModelState.IsValid)
             {
                 Konu yeniKonu = new Konu();
                 yeniKonu.KonuBaslık = model.KonuBaslık;
-                _konuRepository.Ekle(yeniKonu);
+                //_konuRepository.Ekle(yeniKonu);
+                await _konuService.CreateKonu(model);
                 return RedirectToAction("Index");
             }
             return PartialView("KonuEkle", model);           
