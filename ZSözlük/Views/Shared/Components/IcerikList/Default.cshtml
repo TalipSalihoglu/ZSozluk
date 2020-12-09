@@ -26,9 +26,25 @@
         var prevDisabled = !Model.PreviousPage ? "disabled" : "";
         var nextDisabled = !Model.NextPage ? "disabled" : "";
     }
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item ">
+                <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @prevDisabled">Previous</a>
+            </li>
 
-    <a  asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @prevDisabled">Previous</a>
-    <a  asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)"  asp-route-Konuid=@ViewBag.konuid class="btn btn-default @nextDisabled">Next</a>
+            <li class="page-item active">
+                <a class="page-link" href="#">@Model.PageIndex<span class="sr-only"></span></a>
+            </li>
+
+            <li class="page-item ">
+                <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @nextDisabled">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    @* <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @prevDisabled">Previous</a>
+        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @nextDisabled">Next</a>
+    *@
 </div>
 
 <br />
