@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ZSözlük.Contexts;
 using ZSözlük.IRepositories;
+using ZSözlük.Repositories;
 using ZSözlük.Services;
 
 namespace ZSözlük
@@ -25,10 +27,15 @@ namespace ZSözlük
             services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer("server=.\\SQLEXPRESS;database=ZSozlukDb;integrated security=true;"));
             services.AddControllersWithViews();
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ZSozlukContext>();
+
            //services.AddScoped<KonuRepository,KonuRepository>();
            //services.AddScoped<IcerikRepository,IcerikRepository>();
 
            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+           services.AddScoped<IAccountRepository,AccountRepository>();
 
            services.AddScoped<IIcerikService, IcerikService>();
            services.AddScoped<IKonuService, KonuService>();
@@ -51,6 +58,8 @@ namespace ZSözlük
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
