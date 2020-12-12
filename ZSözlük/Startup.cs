@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ZSözlük.Contexts;
 using ZSözlük.IRepositories;
+using ZSözlük.Models;
 using ZSözlük.Repositories;
 using ZSözlük.Services;
 
@@ -27,8 +28,18 @@ namespace ZSözlük
             services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer("server=.\\SQLEXPRESS;database=ZSozlukDb;integrated security=true;"));
             services.AddControllersWithViews();
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ZSozlukContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase=false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+
+            });
 
            //services.AddScoped<KonuRepository,KonuRepository>();
            //services.AddScoped<IcerikRepository,IcerikRepository>();
