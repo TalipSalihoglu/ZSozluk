@@ -39,5 +39,25 @@ namespace ZSözlük.Controllers
             }
             return View();
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(SignInModel signInModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.PasswordSignInAsync(signInModel);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Sozluk");
+                }
+                ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre");
+            }
+            return View(signInModel);
+        }
     }
 }

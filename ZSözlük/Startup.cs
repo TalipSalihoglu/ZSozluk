@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using ZSözlük.Contexts;
 using ZSözlük.IRepositories;
 using ZSözlük.Models;
@@ -28,7 +30,13 @@ namespace ZSözlük
             services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer("server=.\\SQLEXPRESS;database=ZSozlukDb;integrated security=true;"));
             services.AddControllersWithViews();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => 
+            { 
+                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail=false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+            })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ZSozlukContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -41,15 +49,26 @@ namespace ZSözlük
 
             });
 
-           //services.AddScoped<KonuRepository,KonuRepository>();
-           //services.AddScoped<IcerikRepository,IcerikRepository>();
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = new PathString("/Account/Login");
+                opt.Cookie.Name = "ComSci";
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.SameSite = SameSiteMode.Strict;
+                opt.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+            });
 
-           services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<KonuRepository,KonuRepository>();
+            //services.AddScoped<IcerikRepository,IcerikRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
            services.AddScoped<IAccountRepository,AccountRepository>();
 
            services.AddScoped<IIcerikService, IcerikService>();
            services.AddScoped<IKonuService, KonuService>();
+           
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +89,7 @@ namespace ZSözlük
 
             app.UseRouting();
 
+            app.UseSession();
             app.UseAuthentication();
 
             app.UseAuthorization();

@@ -8,7 +8,12 @@ namespace ZSözlük.Models.ViewModel
 {
     public class SignUpUserModel
     {
+        [Required(ErrorMessage = "Lütfen adınızı giriniz")]
+        [Display(Name = "First Name")]
         public string FirstName{ get; set; }
+
+        [Required(ErrorMessage = "Lütfen adınızı giriniz")]
+        [Display(Name = "Last Name")]
         public string LastName{ get; set; }
 
         [Required(ErrorMessage ="Lütfen e-mail adresinizi giriniz")]
