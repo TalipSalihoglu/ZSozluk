@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZSözlük.Contexts;
 
 namespace ZSözlük.Migrations
 {
     [DbContext(typeof(ZSozlukContext))]
-    partial class ZSozlukContextModelSnapshot : ModelSnapshot
+    [Migration("20201213133302_addedUserNameforIcerik")]
+    partial class addedUserNameforIcerik
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

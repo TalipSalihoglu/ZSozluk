@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ZSözlük.Entities;
 using ZSözlük.Services;
@@ -48,8 +50,11 @@ namespace ZSözlük.Controllers
                 Icerik yeniicerik = new Icerik();
                 yeniicerik.IcerikFull = model.IcerikFull;             
                 yeniicerik.KonuID = model.KonuID;
+                yeniicerik.IcerikTarih =DateTime.Now;
+                yeniicerik.UserID= User.FindFirstValue(ClaimTypes.NameIdentifier);
+                yeniicerik.UserName = User.FindFirstValue(ClaimTypes.Name);
                 //_icerikRepository.Ekle(model);
-                await _icerikService.CreateIcerik(model);
+                await _icerikService.CreateIcerik(yeniicerik);
                 return RedirectToAction("Index");
             }
             return View("Index",model);

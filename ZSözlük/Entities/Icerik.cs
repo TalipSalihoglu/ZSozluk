@@ -17,6 +17,8 @@ namespace ZSözlük.Entities
         public DateTime IcerikTarih { get; set; }
         public virtual Konu Konu { get; set; }
 
+        public string UserID { get; set; }
+        public string UserName { get; set; }
         public virtual ApplicationUser User { get; set; }
 
     }
