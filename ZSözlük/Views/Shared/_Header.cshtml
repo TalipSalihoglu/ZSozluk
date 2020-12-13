@@ -27,10 +27,7 @@
                 <form class="form-inline my-2 my-lg-0">
                     <label class="m-sm-4 "></label>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Login</a>
-                            <a asp-controller="Account" asp-action="Signup" class="btn btn-primary">Register</a>
-                        </li>
+                        <partial name="_LoginInfo">
                     </ul>
                 </form>
             </div>

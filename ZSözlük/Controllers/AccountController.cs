@@ -59,5 +59,11 @@ namespace ZSözlük.Controllers
             }
             return View(signInModel);
         }
+
+        public async Task<ActionResult> Logout() 
+        {
+            await _accountRepository.SignOutAsync();
+            return RedirectToAction("Index", "Sozluk");
+        }
     }
 }

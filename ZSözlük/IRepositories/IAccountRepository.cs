@@ -11,5 +11,6 @@ namespace ZSözlük.IRepositories
     {
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
+        Task SignOutAsync();
     }
 }
