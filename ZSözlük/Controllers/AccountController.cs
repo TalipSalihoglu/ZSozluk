@@ -36,6 +36,7 @@ namespace ZSözlük.Controllers
                     return View();
                 }
                 ModelState.Clear();
+                return RedirectToAction("Index", "Sozluk");
             }
             return View();
         }
