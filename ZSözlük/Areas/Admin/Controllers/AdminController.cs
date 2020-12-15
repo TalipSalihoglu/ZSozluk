@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZSözlük.Entities;
 using ZSözlük.Models.ViewModel;
@@ -9,6 +10,7 @@ using ZSözlük.Services;
 
 namespace ZSözlük.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class AdminController : Controller
     {

@@ -52,7 +52,7 @@ namespace ZSözlük
             services.ConfigureApplicationCookie(opt =>
             {
                 opt.LoginPath = new PathString("/Account/Login");
-                opt.Cookie.Name = "ComSci";
+                opt.Cookie.Name = "Sozluk";
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.SameSite = SameSiteMode.Strict;
                 opt.ExpireTimeSpan = TimeSpan.FromMinutes(30);

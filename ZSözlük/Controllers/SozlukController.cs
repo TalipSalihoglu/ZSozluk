@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -35,12 +36,15 @@ namespace ZSözlük.Controllers
             return View();
 
         }
+        [Authorize]
         [HttpGet]
         public IActionResult IcerikEkle()
         {
             var icerik = new Icerik();
             return View("Index",icerik);
         }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> IcerikEkle(Icerik model)
         {
@@ -60,13 +64,15 @@ namespace ZSözlük.Controllers
             return View("Index",model);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult KonuEkle() 
         {
             var konu = new Konu();
             return PartialView("KonuEkle", konu);
         }
- 
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> KonuEkle(Konu model)
         {
