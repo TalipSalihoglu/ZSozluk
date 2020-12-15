@@ -6,14 +6,14 @@
         @foreach (var item in Model)
         {
             <br />
-            <div class="card border-primary">
+            <div class="card small border">
                 <div class="card-header">
                     <strong>@item.UserName</strong>
                 </div>
                 <div class="card-body">
                     <p class="card-text">@item.IcerikFull</p>
                 </div>
-                <div class="text-md-right mr-1 text-muted">
+                <div class="text-md-right mr-1 text-muted small">
                     @item.IcerikTarih.ToShortDateString()
                 </div>
             </div>
