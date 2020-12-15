@@ -8,9 +8,8 @@
 <div class="row">
 
     <div class="col-md-3">
-
-        <div class="container">
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form">
+        <div class="container-sm">
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0" data-toggle="modal" data-target="#form">
                Konu Ekle
             </button>
         </div>
@@ -20,7 +19,7 @@
 
     </div>
 
-    <div class="col-md-7">
+    <div class="col-md-8">
         @if (ViewBag.konuid > 0)
         {
             <form method="post" enctype="multipart/form-data" asp-action="IcerikEkle" asp-controller="Sozluk">
@@ -30,10 +29,9 @@
                         <textarea asp-for="IcerikFull" class="form-control" placeholder="Fikirler Paylaştıkça Çoğalır"></textarea>
                         <span asp-validation-for="@Model.IcerikFull" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Paylas" class="btn btn-success" />
+                    <div class="form-group text-center">
+                        <input type="submit" value="Paylaş" class="btn btn-outline-success btn-sm my-2 waves-effect z-depth-0 w-50" />
                     </div>
-                    <br />
                 </div>
             </form>
         }
@@ -41,8 +39,8 @@
         {
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
-                    <h1 class="display-4">En Son Paylaşılanlar</h1>
-                    <p class="lead">Bu Sayfada Tüm Konularda En Son Paylaşılanlar Var </p>
+                    <h1 class="display-4 text-center">Son Paylaşılanlar</h1>
+                    <p class="lead text-sm-center">Bu Sayfada Tüm Konularda En Son Paylaşılanlar Var </p>
                 </div>
             </div>
         }
