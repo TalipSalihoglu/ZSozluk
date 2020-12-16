@@ -13,8 +13,8 @@ namespace ZSözlük.ViewComponents
         {
             _icerikService = icerikService;
         }
-        public async Task<IViewComponentResult> InvokeAsync(int? KonuId, int pageNumber)
-        {       
+        public async Task<IViewComponentResult> InvokeAsync(int? KonuId,int pageNumber)
+        {   
             if (KonuId.HasValue)
             {
                 //var listwithid = _icerikRepository.GetirİcerikIdile((int)KonuId);
@@ -22,7 +22,6 @@ namespace ZSözlük.ViewComponents
                 return View(await PaginatedListModel<Icerik>.CreateAsync(listwithid, pageNumber, 5));
                ////return View(resultidile);
             }
-
             //var list =  _icerikRepository.GetirİcerikHepsi();//Await 
             var list = await _icerikService.GetAllIcerik();
             return View(await PaginatedListModel<Icerik>.CreateAsync(list, pageNumber, 5));
