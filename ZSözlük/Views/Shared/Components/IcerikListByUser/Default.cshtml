@@ -15,15 +15,18 @@
         </div>
     </div>
 }
+<br />
+
 <div class="border-primary text-center">
     @{
         var prevDisabled = !Model.PreviousPage ? "disabled" : "";
         var nextDisabled = !Model.NextPage ? "disabled" : "";
+        var controllerName = ViewBag.Mypage ?"Myprofile":"UserDetail";
     }
     <nav>
         <ul class="pagination justify-content-center">
             <li class="page-item ">
-                <a asp-action="UserDetail" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Userid=@ViewBag.userid class="btn btn-default @prevDisabled">Previous</a>
+                <a asp-action=@controllerName asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Userid=@ViewBag.userid class="btn btn-default @prevDisabled">Previous</a>
             </li>
 
             <li class="page-item active">
@@ -31,7 +34,7 @@
             </li>
 
             <li class="page-item ">
-                <a asp-action="UserDetail" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-Userid=@ViewBag.userid class="btn btn-default @nextDisabled">Next</a>
+                <a asp-action=@controllerName asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-Userid=@ViewBag.userid class="btn btn-default @nextDisabled">Next</a>
             </li>
         </ul>
     </nav>

@@ -1,0 +1,32 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "MyProfile";
+}
+
+
+<div class="row">
+    <div class="col-md-5">
+        <h3 class="text-center"> Kişisel Bilgilerim </h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 order-lg-5">
+                <div class="card-profile-image mt-2">
+                    <a href="#">
+                        <img src="/img/User.jpg" width="250" height="250" class="rounded-circle">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card border-0">
+            <div class="card-body text-center">
+                <p class="card-text font-weight-bold">First Name : @Model.FirstName</p>
+                <p class="card-text font-weight-bold">Last  Name : @Model.LastName</p>
+                <p class="card-text font-weight-bold">Email address : @Model.Email</p>
+                <p class="card-text font-weight-bold">User name : @Model.UserName</p>
+                <a class="btn btn-dark text-center text-white w-25 ">Bilgilerimi Güncelle</a>
+            </div>
+        </div>       
+    </div>
+    <div class="col-md-7">
+        @await Component.InvokeAsync("IcerikListByUser", new { Userid = Model.Id, pageNumber = ViewBag.pageNumber,MyPage = true })
+    </div>
+</div>

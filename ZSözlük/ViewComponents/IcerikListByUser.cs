@@ -14,8 +14,9 @@ namespace ZSözlük.ViewComponents
         {
             _icerikService = icerikService;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string Userid, int pageNumber)
+        public async Task<IViewComponentResult> InvokeAsync(string Userid, int pageNumber,bool MyPage=false)
         {
+            ViewBag.MyPage = MyPage;
             ViewBag.userid = Userid;
             var list = await _icerikService.GetIcerikByUserId(Userid);
             return View(await PaginatedListModel<Icerik>.CreateAsync(list, pageNumber, 5));

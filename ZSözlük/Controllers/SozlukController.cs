@@ -11,22 +11,22 @@ using ZSözlük.Services;
 namespace ZSözlük.Controllers
 {
     public class SozlukController : Controller
-    {    
-        private readonly IIcerikService _icerikService;       
+    {
+        private readonly IIcerikService _icerikService;
         private readonly IKonuService _konuService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public SozlukController( IIcerikService icerikService, IKonuService konuService,UserManager<ApplicationUser> userManager)
+        public SozlukController(IIcerikService icerikService, IKonuService konuService, UserManager<ApplicationUser> userManager)
         {
             _icerikService = icerikService;
             _konuService = konuService;
             _userManager = userManager;
         }
-        public IActionResult Index(int? Konuid,int pageNumber=1)
+        public IActionResult Index(int? Konuid, int pageNumber = 1)
         {
             if (Konuid.HasValue)
             {
-                ViewBag.konuid = (int)Konuid;                
+                ViewBag.konuid = (int)Konuid;
             }
             else
             {
@@ -41,7 +41,7 @@ namespace ZSözlük.Controllers
         public IActionResult IcerikEkle()
         {
             var icerik = new Icerik();
-            return View("Index",icerik);
+            return View("Index", icerik);
         }
 
         [Authorize]
@@ -52,20 +52,20 @@ namespace ZSözlük.Controllers
             if (ModelState.IsValid)
             {
                 Icerik yeniicerik = new Icerik();
-                yeniicerik.IcerikFull = model.IcerikFull;             
+                yeniicerik.IcerikFull = model.IcerikFull;
                 yeniicerik.KonuID = model.KonuID;
-                yeniicerik.IcerikTarih =DateTime.Now;
-                yeniicerik.UserID= User.FindFirstValue(ClaimTypes.NameIdentifier);
+                yeniicerik.IcerikTarih = DateTime.Now;
+                yeniicerik.UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 yeniicerik.UserName = User.FindFirstValue(ClaimTypes.Name);
                 await _icerikService.CreateIcerik(yeniicerik);
                 return RedirectToAction("Index");
             }
-            return View("Index",model);
+            return View("Index", model);
         }
 
         [Authorize]
         [HttpGet]
-        public IActionResult KonuEkle() 
+        public IActionResult KonuEkle()
         {
             var konu = new Konu();
             return PartialView("KonuEkle", konu);
@@ -82,17 +82,24 @@ namespace ZSözlük.Controllers
                 await _konuService.CreateKonu(model);
                 return RedirectToAction("Index");
             }
-            return PartialView("KonuEkle", model);           
+            return PartialView("KonuEkle", model);
         }
 
         [Authorize]
-        public async Task<IActionResult> UserDetail(string Userid, int pageNumber = 1) 
+        public async Task<IActionResult> UserDetail(string Userid, int pageNumber = 1)
         {
-           var User = await _userManager.FindByIdAsync(Userid);
-           ViewBag.pageNumber = pageNumber;
-           var list= await _icerikService.GetIcerikByUserId(Userid);
-           ViewBag.count=list.Count;
-           return View(User);
+            var User = await _userManager.FindByIdAsync(Userid);
+            ViewBag.pageNumber = pageNumber;
+            var list = await _icerikService.GetIcerikByUserId(Userid);
+            ViewBag.count = list.Count;
+            return View(User);
+        }
+           
+        public async Task<IActionResult> MyProfile(int pageNumber = 1)
+        {
+            ViewBag.pageNumber = pageNumber;
+            ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+            return View(applicationUser);
         }
     }
 }
