@@ -14,5 +14,6 @@ namespace ZSözlük.Services
         Task UpdateIcerik(Icerik icerikToBeUpdated, Icerik icerik);
         Task DeleteIcerik(Icerik icerik);
         Task<IEnumerable<Icerik>> GetIcerikByKonuId(int id);
+        Task<List<Icerik>> GetIcerikByUserId(string id);
     }
 }

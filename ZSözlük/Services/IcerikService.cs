@@ -44,6 +44,12 @@ namespace ZSözlük.Services
              return  list.Where(i => i.KonuID == id).OrderByDescending(I => I.IcerikID);//ToListAsync();         
         }
 
+        public async Task<List<Icerik>> GetIcerikByUserId(string id)
+        {
+            var list = await _unitOfWork.Icerikler.GetAllAsync();
+            return list.Where(i => i.UserID == id).OrderByDescending(I => I.IcerikID).ToList();         
+        }
+
         public async Task UpdateIcerik(Icerik icerikToBeUpdated, Icerik icerik) // ???
         {
             icerikToBeUpdated.IcerikFull = icerik.IcerikFull;
