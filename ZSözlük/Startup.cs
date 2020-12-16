@@ -67,8 +67,10 @@ namespace ZSözlük
 
            services.AddScoped<IIcerikService, IcerikService>();
            services.AddScoped<IKonuService, KonuService>();
-           
-            services.AddSession();
+
+           services.AddScoped<UserManager<ApplicationUser>,UserManager<ApplicationUser>>();
+
+           services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
