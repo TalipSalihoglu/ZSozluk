@@ -1,0 +1,38 @@
+﻿@model PaginatedListModel<Icerik>
+
+@foreach (var item in Model)
+{
+    <br />
+    <div class="card small border">
+        <div class="card-header">
+            <strong>@item.UserName</strong>
+        </div>
+        <div class="card-body">
+            <p class="card-text">@item.IcerikFull</p>
+        </div>
+        <div class="text-md-right mr-1 text-muted small">
+            @item.IcerikTarih.ToShortDateString()
+        </div>
+    </div>
+}
+<div class="border-primary text-center">
+    @{
+        var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.NextPage ? "disabled" : "";
+    }
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item ">
+                <a asp-action="UserDetail" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Userid=@ViewBag.userid class="btn btn-default @prevDisabled">Previous</a>
+            </li>
+
+            <li class="page-item active">
+                <a class="page-link" href="#">@Model.PageIndex<span class="sr-only"></span></a>
+            </li>
+
+            <li class="page-item ">
+                <a asp-action="UserDetail" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-Userid=@ViewBag.userid class="btn btn-default @nextDisabled">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

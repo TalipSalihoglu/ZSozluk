@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ZSözlük.Entities;
+using ZSözlük.Models;
 using ZSözlük.Services;
 
 namespace ZSözlük.Controllers
 {
     public class SozlukController : Controller
-    {
-        //private readonly KonuRepository _konuRepository;
-        //private readonly IcerikRepository _icerikRepository;       
+    {    
         private readonly IIcerikService _icerikService;       
-        private readonly IKonuService _konuService;       
+        private readonly IKonuService _konuService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public SozlukController( IIcerikService icerikService, IKonuService konuService)//KonuRepository konuRepository,IcerikRepository icerikRepository,
+        public SozlukController( IIcerikService icerikService, IKonuService konuService,UserManager<ApplicationUser> userManager)
         {
-           // _konuRepository = konuRepository;
-           // _icerikRepository = icerikRepository;
             _icerikService = icerikService;
             _konuService = konuService;
+            _userManager = userManager;
         }
         public IActionResult Index(int? Konuid,int pageNumber=1)
         {
@@ -57,7 +57,6 @@ namespace ZSözlük.Controllers
                 yeniicerik.IcerikTarih =DateTime.Now;
                 yeniicerik.UserID= User.FindFirstValue(ClaimTypes.NameIdentifier);
                 yeniicerik.UserName = User.FindFirstValue(ClaimTypes.Name);
-                //_icerikRepository.Ekle(model);
                 await _icerikService.CreateIcerik(yeniicerik);
                 return RedirectToAction("Index");
             }
@@ -80,11 +79,20 @@ namespace ZSözlük.Controllers
             {
                 Konu yeniKonu = new Konu();
                 yeniKonu.KonuBaslık = model.KonuBaslık;
-                //_konuRepository.Ekle(yeniKonu);
                 await _konuService.CreateKonu(model);
                 return RedirectToAction("Index");
             }
             return PartialView("KonuEkle", model);           
+        }
+
+        [Authorize]
+        public async Task<IActionResult> UserDetail(string Userid, int pageNumber = 1) 
+        {
+           var User = await _userManager.FindByIdAsync(Userid);
+           ViewBag.pageNumber = pageNumber;
+           var list= await _icerikService.GetIcerikByUserId(Userid);
+           ViewBag.count=list.Count;
+           return View(User);
         }
     }
 }
