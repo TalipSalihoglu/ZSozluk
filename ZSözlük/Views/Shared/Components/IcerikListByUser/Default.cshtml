@@ -4,8 +4,12 @@
 {
     <br />
     <div class="card small border">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <strong>@item.UserName</strong>
+            @if (ViewBag.Mypage)
+            {
+                <a asp-controller="Sozluk" asp-action="DeleteIcerik" asp-route-id="@item.IcerikID" type="button" class="btn btn-danger btn-sm">Sil</a>
+            }
         </div>
         <div class="card-body">
             <p class="card-text">@item.IcerikFull</p>

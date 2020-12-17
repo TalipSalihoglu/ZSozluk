@@ -87,7 +87,7 @@ namespace ZSözlük.Controllers
 
         [Authorize]
         public async Task<IActionResult> UserDetail(string Userid, int pageNumber = 1)
-        {
+        {          
             var User = await _userManager.FindByIdAsync(Userid);
             ViewBag.pageNumber = pageNumber;
             var list = await _icerikService.GetIcerikByUserId(Userid);
@@ -100,6 +100,12 @@ namespace ZSözlük.Controllers
             ViewBag.pageNumber = pageNumber;
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
             return View(applicationUser);
+        }
+        public async Task<IActionResult> DeleteIcerik(int id) 
+        {
+            var icerik =await _icerikService.GetIcerikById(id);
+            await _icerikService.DeleteIcerik(icerik);
+            return RedirectToAction("MyProfile");
         }
     }
 }
