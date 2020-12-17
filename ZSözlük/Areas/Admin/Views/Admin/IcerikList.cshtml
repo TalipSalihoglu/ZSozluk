@@ -1,0 +1,61 @@
+﻿@using ZSözlük.Entities
+@using ZSözlük.Models.ViewModel
+@model PaginatedListModel<Icerik>
+
+@{ 
+    ViewData["Title"] = "IcerikList";
+    int i = 1;
+}
+
+<table class="table table-bordered table-hover mt-2">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">İçerik ıd </th>
+            <th scope="col">Konu </th>
+            <th scope="col">Kullanıcı id </th>
+            <th scope="col">Kullanıcı adı </th>
+            <th scope="col">İçerik </th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="row">@(i++)</th>
+            <td>@item.IcerikID</td>
+            <td>@item.KonuID</td>
+            <td>@item.UserID</td>
+            <td>@item.UserName</td>
+            <td>@item.IcerikFull</td>
+            <td>
+                <a asp-action="DeleteIcerik" asp-route-id=@item.IcerikID class="btn btn-sm btn-danger text-dark"> Sil </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@{
+    var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.NextPage ? "disabled" : "";
+    var controllerName = ViewBag.icerikList ? "IcerikList" : "KonuListbyid";
+}
+
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item ">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="@controllerName" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Previous</a>
+        </li>
+
+        <li class="page-item active">
+            <a class="page-link" href="#">@Model.PageIndex<span class="sr-only"></span></a>           
+        </li>
+
+        <li class="page-item ">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="@controllerName" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Next</a>
+        </li>
+    </ul>
+</nav>

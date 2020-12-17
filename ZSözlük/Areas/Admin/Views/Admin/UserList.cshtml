@@ -1,0 +1,37 @@
+﻿@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "UserList";
+    int i = 1;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Sayfasını İncele</th>
+            <th scope="col">Kullanıcıyı Engelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="row">@(i++)</th>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+            <td>
+                <a asp-area="" asp-controller="Sozluk" asp-action="UserDetail" asp-route-Userid="@item.Id" class="btn btn-warning">Görüntüle</a>
+            </td>
+            <td>
+                <a class="btn btn-danger">Kullanıcıyı Sil</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
