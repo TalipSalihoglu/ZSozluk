@@ -66,5 +66,20 @@ namespace ZSözlük.Controllers
             await _accountRepository.SignOutAsync();
             return RedirectToAction("Index", "Sozluk");
         }
+
+        [HttpPost]
+        public async Task<ActionResult> EditPersonalinfo(EditUserViewModel modelUser)
+        {
+            var user = await _accountRepository.GetApplicationUserByid(modelUser.Id);
+
+            user.Id= modelUser.Id;
+            user.Email = modelUser.Email;
+            user.FirstName = modelUser.FirstName;
+            user.LastName = modelUser.LastName;
+                    
+            await _accountRepository.EditUser(user);
+
+            return RedirectToAction("MyProfile","Sozluk"); 
+        }
     }
 }

@@ -38,5 +38,15 @@ namespace ZSözlük.Repositories
         {
             await _signInManager.SignOutAsync();
         }
+
+        public async Task<ApplicationUser> GetApplicationUserByid(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            return user;
+        }
+        public async Task<IdentityResult> EditUser(ApplicationUser userModel) 
+        {
+             return await _userManager.UpdateAsync(userModel);         
+        }
     }
 }
