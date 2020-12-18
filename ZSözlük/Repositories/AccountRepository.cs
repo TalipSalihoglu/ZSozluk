@@ -22,9 +22,12 @@ namespace ZSözlük.Repositories
             var user = new ApplicationUser()
             {
                 FirstName = userModel.FirstName,
-                LastName=userModel.LastName,
+                LastName = userModel.LastName,
                 Email = userModel.Email,
-                UserName = userModel.UserName, 
+                UserName = userModel.UserName,
+                Age = userModel.Age,
+                City = userModel.City,
+                Country=userModel.Country,
             };
             var result = await _userManager.CreateAsync(user, userModel.Password);
             return result;
