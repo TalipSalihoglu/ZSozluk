@@ -25,6 +25,14 @@ namespace ZSözlük.Models.ViewModel
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+
         [Required(ErrorMessage = "Lütfen şifrenizi giriniz")]
         [Compare("ConfirmPassword",ErrorMessage ="Şifreler eşleşmedi")]
         [Display(Name = "Password")]
