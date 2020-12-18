@@ -12,7 +12,9 @@ namespace ZSözlük.Models
         public string FirstName{ get; set; }
         public string LastName{ get; set; }
         public DateTime? DateOfBirth{ get; set; }
-
+        public int Age{ get; set; }
+        public string Country{ get; set; }
+        public string City{ get; set; }
         public List<Icerik> Icerikler { get; set; }
 
     }
