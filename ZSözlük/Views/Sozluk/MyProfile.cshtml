@@ -22,6 +22,8 @@
                 <p class="card-text font-weight-bold">Last  Name : @Model.LastName</p>
                 <p class="card-text font-weight-bold">Email address : @Model.Email</p>
                 <p class="card-text font-weight-bold">User name : @Model.UserName</p>
+                <p class="card-text font-weight-bold">Age : @Model.Age</p>
+                <p class="card-text font-weight-bold">Country - City : @Model.Country - @Model.City</p>
                 <a class="btn btn-dark text-center text-white w-25 " data-toggle="modal" data-target="#Editİnfo" role="button">Bilgilerimi Güncelle</a>
             </div>
         </div>
@@ -43,21 +45,33 @@
             <div class="modal-body">
                 <form asp-action="EditPersonalinfo">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id"/>
+                    <input type="hidden" asp-for="Id" />
                     <div class="form-group">
-                        <input asp-for="FirstName" class="form-control"/>
+                        <input asp-for="FirstName" class="form-control" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="LastName" class="form-control"/>
+                        <input asp-for="LastName" class="form-control" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Email" class="form-control"/>
+                        <input asp-for="Email" class="form-control" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
+                    <div class="form-group">
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Country" class="form-control" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
                     <div class="modal-footer flex justify-content-center">
-                        <button  asp-action="EditPersonalinfo" asp-controller="Account" asp-route-id="@Model.Id" class="btn btn-outline-success">Kaydet</button>
+                        <button asp-action="EditPersonalinfo" asp-controller="Account" asp-route-id="@Model.Id" class="btn btn-outline-success">Kaydet</button>
                     </div>
                 </form>
             </div>

@@ -15,5 +15,11 @@ namespace ZSözlük.Models.ViewModel
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
+        public int Age { get; set; }
+        [Required]
+        public string Country { get; set; }
+        [Required]
+        public string City { get; set; }
     }
 }

@@ -76,6 +76,9 @@ namespace ZSözlük.Controllers
             user.Email = modelUser.Email;
             user.FirstName = modelUser.FirstName;
             user.LastName = modelUser.LastName;
+            user.Age = modelUser.Age;
+            user.City = modelUser.City;
+            user.Country = modelUser.Country;
                     
             await _accountRepository.EditUser(user);
 
