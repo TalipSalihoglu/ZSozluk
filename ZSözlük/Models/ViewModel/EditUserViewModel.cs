@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,9 @@ namespace ZSözlük.Models.ViewModel
 {
     public class EditUserViewModel
     {
+        [Required]
         public string Id{ get; set; }
+        public IFormFile Photo{ get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

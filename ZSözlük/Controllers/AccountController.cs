@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -71,18 +72,32 @@ namespace ZSözlük.Controllers
         public async Task<ActionResult> EditPersonalinfo(EditUserViewModel modelUser)
         {
             var user = await _accountRepository.GetApplicationUserByid(modelUser.Id);
+            if (ModelState.IsValid)
+            {
+                user.Id = modelUser.Id;
+                user.Email = modelUser.Email;
+                user.FirstName = modelUser.FirstName;
+                user.LastName = modelUser.LastName;
+                user.Age = modelUser.Age;
+                user.City = modelUser.City;
+                user.Country = modelUser.Country;
 
-            user.Id= modelUser.Id;
-            user.Email = modelUser.Email;
-            user.FirstName = modelUser.FirstName;
-            user.LastName = modelUser.LastName;
-            user.Age = modelUser.Age;
-            user.City = modelUser.City;
-            user.Country = modelUser.Country;
-                    
-            await _accountRepository.EditUser(user);
+                if (modelUser.Photo!=null)
+                {
+                    var path = Path.GetExtension(modelUser.Photo.FileName);
+                    var newPhotoName = Guid.NewGuid()+path;
+                    var uploadFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/" + newPhotoName);
 
-            return RedirectToAction("MyProfile","Sozluk"); 
+                    var stream = new FileStream(uploadFile, FileMode.Create);
+                    await modelUser.Photo.CopyToAsync(stream);
+
+                    user.Photo = newPhotoName;
+                }
+
+                await _accountRepository.EditUser(user);
+            }
+            return RedirectToAction("MyProfile", "Sozluk");
         }
+        
     }
 }
