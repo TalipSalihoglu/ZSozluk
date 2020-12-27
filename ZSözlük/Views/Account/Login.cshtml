@@ -16,19 +16,19 @@
 <body>
 
     <div class="container my-5">
-        <div class="card">
-            <h4 class="card-header info-color text-center py-4">
+        <div class="card small badge-light">
+            <h4 class="card-header badge-info text-center py-4">
                 <strong>Giriş Yap</strong>
             </h4>
             <form asp-action="Login" class="text-center border border-light p-5">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="UserName" class="control-label"></label>
+                    <label asp-for="UserName" class="control-label font-weight-bold"></label>
                     <input asp-for="UserName" class="form-control" />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
+                    <label asp-for="Password" class="control-label font-weight-bold"></label>
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
             </form>
             <div class="text-center">
-                <p>Kayıt olmak için <a asp-action="Signup" asp-controller="Account"> buraya </a> tıkla</p>
+                <p class="font-weight-bold">Kayıt olmak için <a asp-action="Signup" asp-controller="Account"> buraya </a> tıkla</p>
             </div>
         </div>
       </div>
