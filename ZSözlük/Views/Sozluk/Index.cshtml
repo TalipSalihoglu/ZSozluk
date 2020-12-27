@@ -9,8 +9,8 @@
 
     <div class="col-md-3">
         <div class="container-sm">
-            <button type="button" class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0" data-toggle="modal" data-target="#form">
-               Konu Ekle
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 badge-pill" data-toggle="modal" data-target="#form">
+                Konu Ekle
             </button>
         </div>
         <partial name="KonuEkle" />
@@ -22,18 +22,19 @@
     <div class="col-md-8">
         @if (ViewBag.konuid > 0)
         {
-            <form method="post" enctype="multipart/form-data" asp-action="IcerikEkle" asp-controller="Sozluk">
-                <div class="container mt-3 shadow-lg">
-                    <div class="form-group">
+            <div class="container shadow-lg mt-3 badge-light">
+                <form method="post" enctype="multipart/form-data" asp-action="IcerikEkle" asp-controller="Sozluk">
+                    <br />
+                    <div class="form-group small">
                         <textarea asp-for="KonuID" class="form-control" hidden></textarea>
                         <textarea asp-for="IcerikFull" class="form-control" placeholder="Fikirler Paylaştıkça Çoğalır"></textarea>
                         <span asp-validation-for="@Model.IcerikFull" class="text-danger"></span>
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" value="Paylaş" class="btn btn-outline-success btn-sm my-2 waves-effect z-depth-0 w-50" />
+                        <input type="submit" value="Paylaş" class="btn btn-outline-success badge-pill btn-sm my-2 waves-effect z-depth-0 w-50" />
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         }
         else
         {
@@ -45,7 +46,7 @@
             </div>
         }
         <br />
-        @await Component.InvokeAsync("IcerikList", new { KonuId = ViewBag.konuid , pageNumber=ViewBag.pageNumber })
+        @await Component.InvokeAsync("IcerikList", new { KonuId = ViewBag.konuid, pageNumber = ViewBag.pageNumber })
 
     </div>
 </div>
