@@ -69,7 +69,7 @@ namespace ZSözlük.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditPersonalinfo(EditUserViewModel modelUser)
+        public async Task<IActionResult> EditPersonalinfo(EditUserViewModel modelUser)
         {
             var user = await _accountRepository.GetApplicationUserByid(modelUser.Id);
             if (ModelState.IsValid)
@@ -98,6 +98,16 @@ namespace ZSözlük.Controllers
             }
             return RedirectToAction("MyProfile", "Sozluk");
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> EditSocialMedia(EditUserViewModel modelUser)
+        { 
+            var user = await _accountRepository.GetApplicationUserByid(modelUser.Id);
+            user.Link_facebook = modelUser.Link_facebook;
+            user.Link_insta = modelUser.Link_insta;
+            user.Link_twitter = modelUser.Link_twitter;
+            await _accountRepository.EditUser(user);
+            return RedirectToAction("MyProfile", "Sozluk");
+        }
     }
 }
