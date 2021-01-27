@@ -3,6 +3,8 @@
     ViewData["Title"] = "UserDetail";
     int countOficerik = ViewBag.count;
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
 
 <div class="main-content">
     <!-- Page content -->
@@ -13,7 +15,7 @@
                 <div class="card card-profile shadow">
                     <br />
                     <div class="row justify-content-center">
-                        <div class="col-lg-7 order-lg-7">   
+                        <div class="col-lg-7 order-lg-7">
                             <div class="card-profile-image mt-2">
                                 <a href="#">
                                     <img src="/img/@Model.Photo" width="250" height="250" class="rounded-circle">
@@ -41,15 +43,33 @@
                             </div>
                             <div class="h5 mt-4">
                                 <i class="ni business_briefcase-24 mr-2"></i> @Model.Country, @Model.City
-                            </div>                          
+                            </div>
+                            <div class="table border-primary">
+                                <p>
+                                    @{
+                                        if (Model.Link_facebook != null)
+                                        {
+                                            <a href=@Model.Link_facebook class="fa fa-facebook"></a>
+                                        }
+                                        if (Model.Link_twitter != null)
+                                        {
+                                            <a href=@Model.Link_twitter class="fa fa-twitter"></a>
+                                        }
+                                        if (Model.Link_insta != null)
+                                        {
+                                            <a href=@Model.Link_insta class="fa fa-instagram"></a>
+                                        }
+                                    }
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <div class="col-md-8">
-                @await Component.InvokeAsync("IcerikListByUser", new { Userid =Model.Id , pageNumber = ViewBag.pageNumber })
-            </div>  
+                @await Component.InvokeAsync("IcerikListByUser", new { Userid = Model.Id, pageNumber = ViewBag.pageNumber })
+            </div>
         </div>
     </div>
 </div>

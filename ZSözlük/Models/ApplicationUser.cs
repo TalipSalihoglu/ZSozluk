@@ -16,6 +16,9 @@ namespace ZSözlük.Models
         public int Age{ get; set; }
         public string Country{ get; set; }
         public string City{ get; set; }
+        public string Link_insta { get; set; }
+        public string Link_facebook { get; set; }
+        public string Link_twitter { get; set; }
         public List<Icerik> Icerikler { get; set; }
 
     }

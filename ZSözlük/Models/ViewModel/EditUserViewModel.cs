@@ -24,5 +24,9 @@ namespace ZSözlük.Models.ViewModel
         public string Country { get; set; }
         [Required]
         public string City { get; set; }
+        public string Link_insta { get; set; }
+        public string Link_facebook { get; set; }
+        public string Link_twitter { get; set; }
+
     }
 }

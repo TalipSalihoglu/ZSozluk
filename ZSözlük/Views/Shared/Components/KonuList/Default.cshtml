@@ -1,15 +1,15 @@
 ﻿@model List<Konu>
-    <div class="list-group">
+<div class="list-group">
 
-        <a asp-action="Index" asp-controller="Sozluk" class="list-group-item list-group-item-action @(ViewBag.konuid==null?"active":"")">
-            Tüm Başlıklar
+    <a asp-action="Index" asp-controller="Sozluk" class="list-group-item list-group-item-action @(ViewBag.konuid==null?"active":"")">
+        Tüm Başlıklar
+    </a>
+
+
+    @foreach (var item in Model)
+    {
+        <a asp-action="Index" asp-controller="Sozluk" asp-route-Konuid="@item.KonuID" class="list-group-item list-group-item-action @(ViewBag.konuid?.ToString()==item.KonuID.ToString()?"active":"")">
+            @item.KonuBaslık
         </a>
-        
-
-        @foreach (var item in Model)
-        {
-            <a asp-action="Index" asp-controller="Sozluk" asp-route-Konuid="@item.KonuID" class="list-group-item list-group-item-action @(ViewBag.konuid?.ToString()==item.KonuID.ToString()?"active":"")">
-                @item.KonuBaslık
-            </a>
-        }
-    </div>
+    }
+</div>

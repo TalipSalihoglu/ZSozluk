@@ -1,12 +1,14 @@
 ﻿@model ApplicationUser
 @{
     ViewData["Title"] = "MyProfile";
-}
 
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col-md-5">
-        <h3 class="text-center"> Kişisel Bilgilerim </h3>
+        <h3 class="text-center text-black-50"> Kişisel Bilgilerim </h3>
         <div class="row justify-content-center">
             <div class="col-lg-4 order-lg-5">
                 <div class="card-profile-image mt-2">
@@ -16,15 +18,22 @@
                 </div>
             </div>
         </div>
-        <div class="card border-0">          
+        <div class="card border-0">
             <div class="card-body text-center mt-5">
+                <div class="table border-primary">
+                    <p>
+                        <a href=@Model.Link_facebook class="fa fa-facebook"></a>
+                        <a href=@Model.Link_twitter class="fa fa-twitter"></a>
+                        <a href=@Model.Link_insta class="fa fa-instagram"></a>
+                    </p>
+                    <a class="btn btn-info text-center text-white w-25 " data-toggle="modal" data-target="#EditSocialMedia" role="button">Hesaplarımı Güncelle</a>
+                </div>
                 <p class="card-text font-weight-bold">First Name : @Model.FirstName</p>
                 <p class="card-text font-weight-bold">Last  Name : @Model.LastName</p>
-                <p class="card-text font-weight-bold">Email address : @Model.Email</p>
                 <p class="card-text font-weight-bold">User name : @Model.UserName</p>
                 <p class="card-text font-weight-bold">Age : @Model.Age</p>
                 <p class="card-text font-weight-bold">Country - City : @Model.Country - @Model.City</p>
-                <a class="btn btn-dark text-center text-white w-25 " data-toggle="modal" data-target="#Editİnfo" role="button">Bilgilerimi Güncelle</a>
+                <a class="btn btn-info text-center text-white w-25 " data-toggle="modal" data-target="#Editİnfo" role="button">Bilgilerimi Güncelle</a>
             </div>
         </div>
     </div>
@@ -80,4 +89,41 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="EditSocialMedia" tabindex="-1" role="dialog" aria-labelledby="odalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel">Sosyal Medya Hesaplarım</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form asp-action="">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label class="font-weight-bold">Instagram</label>
+                    <input asp-for="Link_insta" class="form-control" />
+                    <span asp-validation-for="Link_insta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Facebook</label>
+                    <input asp-for="Link_facebook" class="form-control" />
+                    <span asp-validation-for="Link_facebook" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Twitter</label>
+                    <input asp-for="Link_twitter" class="form-control" />
+                    <span asp-validation-for="Link_twitter" class="text-danger"></span>
+                </div>
+                <div class="modal-footer flex justify-content-center">
+                    <button asp-action="EditSocialMedia" asp-controller="Account" asp-route-id="@Model.Id" class="btn btn-outline-success">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </div>
