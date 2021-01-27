@@ -236,6 +236,15 @@ namespace ZSözlük.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Link_facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link_insta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link_twitter")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
