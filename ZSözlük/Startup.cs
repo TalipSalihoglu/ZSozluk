@@ -27,7 +27,7 @@ namespace ZSözlük
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer("server=.\\SQLEXPRESS;database=ZSozlukDb;integrated security=true;"));
+            services.AddDbContext<ZSozlukContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options => 
