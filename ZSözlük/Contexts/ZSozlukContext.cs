@@ -19,5 +19,6 @@ namespace ZSözlük.Contexts
 
         public DbSet<Konu> Konular { get; set; }
         public DbSet<Icerik> Icerikler { get; set; }
+        public DbSet<LikeModel> Likes { get; set; }
     }
 }
