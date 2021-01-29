@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using ZSözlük.Contexts;
 using ZSözlük.IRepositories;
+using ZSözlük.IServices;
 using ZSözlük.Models;
 using ZSözlük.Repositories;
 using ZSözlük.Services;
@@ -58,8 +59,6 @@ namespace ZSözlük
                 opt.ExpireTimeSpan = TimeSpan.FromMinutes(30);
             });
 
-            //services.AddScoped<KonuRepository,KonuRepository>();
-            //services.AddScoped<IcerikRepository,IcerikRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -67,7 +66,7 @@ namespace ZSözlük
 
            services.AddScoped<IIcerikService, IcerikService>();
            services.AddScoped<IKonuService, KonuService>();
-
+           services.AddScoped<ILikeService, LikeService>();
            services.AddScoped<UserManager<ApplicationUser>,UserManager<ApplicationUser>>();
 
            services.AddSession();

@@ -9,6 +9,7 @@ namespace ZSözlük.IRepositories
     {
         IIcerikRepository Icerikler{ get; }
         IKonuRepository Konular{ get; }
+        ILikeRepository Likes { get; }
         Task<int> CommitAsync();
     }
 }

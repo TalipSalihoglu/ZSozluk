@@ -14,6 +14,7 @@ namespace ZSözlük
         private readonly ZSozlukContext _context;
         private IcerikRepository _icerikRepository;
         private KonuRepository _konuRepository;
+        private LikeRepository _likeRepository;
 
         public UnitOfWork(ZSozlukContext context)
         {
@@ -25,6 +26,8 @@ namespace ZSözlük
 
         public IKonuRepository Konular => _konuRepository = _konuRepository ?? new KonuRepository(_context);
 
+        public ILikeRepository Likes => _likeRepository = _likeRepository ?? new LikeRepository(_context);
+
         public async Task<int> CommitAsync()
         {
             return await _context.SaveChangesAsync();
@@ -35,6 +38,7 @@ namespace ZSözlük
            _context.Dispose();
             _icerikRepository = null;
             _konuRepository = null;
+            _likeRepository = null;
         }
     }
 }
