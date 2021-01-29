@@ -1,5 +1,7 @@
 ﻿@model PaginatedListModel<Icerik>
-
+@inject ZSözlük.IServices.ILikeService Like
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 @foreach (var item in Model)
 {
     <br />
@@ -14,6 +16,20 @@
         <div class="card-body">
             <p class="card-text">@item.IcerikFull</p>
         </div>
+        <div>
+            @{
+                string userid = _userManager.GetUserId(User);
+                if (!Like.isLike(item.IcerikID, userid))
+                {
+
+                    <a asp-action="Like" asp-controller="Like" asp-route-id="@item.IcerikID" class="btn btn-light bi bi-star ml-3 "> @Like.CountOfLike(item.IcerikID) likes</a>
+                }
+                else
+                {
+                    <a asp-action="CancelLike" asp-controller="Like" asp-route-id="@item.IcerikID" class="btn btn-light bi bi-star-fill ml-3"> @Like.CountOfLike(item.IcerikID) likes</a>
+                }
+            }
+        </div>
         <div class="text-md-right mr-1 text-muted small">
             @item.IcerikTarih.ToShortDateString()
         </div>
@@ -25,7 +41,7 @@
     @{
         var prevDisabled = !Model.PreviousPage ? "disabled" : "";
         var nextDisabled = !Model.NextPage ? "disabled" : "";
-        var controllerName = ViewBag.Mypage ?"Myprofile":"UserDetail";
+        var controllerName = ViewBag.Mypage ? "Myprofile" : "UserDetail";
     }
     <nav>
         <ul class="pagination justify-content-center">
