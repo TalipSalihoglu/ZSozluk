@@ -5,7 +5,7 @@
 @foreach (var item in Model)
 {
     <br />
-    <div class="card small border">
+    <div class="card border">
         <div class="card-header d-flex justify-content-between">
             <strong>@item.UserName</strong>
             @if (ViewBag.Mypage)
@@ -22,11 +22,11 @@
                 if (!Like.isLike(item.IcerikID, userid))
                 {
 
-                    <a asp-action="Like" asp-controller="Like" asp-route-id="@item.IcerikID" class="btn btn-light bi bi-star ml-3 "> @Like.CountOfLike(item.IcerikID) likes</a>
+                    <a asp-action="Like" asp-controller="Like" asp-route-id="@item.IcerikID" asp-route-pageNumber="@Model.PageIndex" asp-route-PageUserid="@ViewBag.userid" class="btn btn-light bi bi-star ml-3 "> @Like.CountOfLike(item.IcerikID) likes</a>
                 }
                 else
                 {
-                    <a asp-action="CancelLike" asp-controller="Like" asp-route-id="@item.IcerikID" class="btn btn-light bi bi-star-fill ml-3"> @Like.CountOfLike(item.IcerikID) likes</a>
+                    <a asp-action="CancelLike" asp-controller="Like" asp-route-id="@item.IcerikID"  asp-route-pageNumber="@Model.PageIndex" asp-route-PageUserid="@ViewBag.userid"  class="btn btn-light bi bi-star-fill ml-3"> @Like.CountOfLike(item.IcerikID) likes</a>
                 }
             }
         </div>

@@ -20,19 +20,29 @@ namespace ZSözlük.Controllers
             _userManager = userManager;
             _likeService= likeService;
         }
+
         [Authorize]
-        public async Task<IActionResult> Like(int id)
+        public async Task<IActionResult> Like(int id, int? Konuid, string PageUserid, int pageNumber = 1)
         {
             string user_id = _userManager.GetUserId(User);
             await _likeService.Like(id, user_id);
-            return RedirectToAction("Index","Sozluk");
+            if(PageUserid != null)
+            {
+                return RedirectToAction("UserDetail", "Sozluk", new { Userid=PageUserid, pageNumber });
+            }
+            return RedirectToAction("Index", "Sozluk", new { Konuid, pageNumber });
         }
+
         [Authorize]
-        public async Task<IActionResult> CancelLike(int id)
+        public async Task<IActionResult> CancelLike(int id, int? Konuid, string PageUserid, int pageNumber = 1)
         {
             string UserId = _userManager.GetUserId(User);
             await _likeService.CancelLike(id, UserId);
-            return RedirectToAction("Index", "Sozluk");
+            if (PageUserid != null)
+            {
+                return RedirectToAction("UserDetail", "Sozluk", new { Userid = PageUserid, pageNumber });
+            }
+            return RedirectToAction("Index", "Sozluk", new { Konuid, pageNumber });
         }
     }
 }

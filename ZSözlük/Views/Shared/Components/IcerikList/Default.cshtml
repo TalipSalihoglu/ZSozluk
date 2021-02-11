@@ -7,29 +7,31 @@
     @foreach (var item in Model)
     {
         <br />
-        <div class="card small border">
+        <div class="card border">
             <div class="card-header">
                 <strong><a asp-action="UserDetail" asp-route-Userid=@item.UserID>@item.UserName</a></strong>
             </div>
             <div class="card-body">
-                <p class="card-text">@item.IcerikFull</p>
+                <p class="card-text font-weight-bold">@item.IcerikFull</p>
             </div>
             <div>
                 @{
                     string userid = _userManager.GetUserId(User);
+                    int? i =ViewBag.konuid>0 ? ViewBag.konuid :null;
+
                     if (!Like.isLike(item.IcerikID, userid))
                     {
 
-                        <a asp-action="Like" asp-controller="Like" asp-route-id="@item.IcerikID" class="btn btn-light bi bi-star ml-3 "> @Like.CountOfLike(item.IcerikID) likes</a>
+                        <a asp-action="Like" asp-controller="Like" asp-route-id="@item.IcerikID" asp-route-Konuid="@i" asp-route-pageNumber="@Model.PageIndex" class="btn btn-light bi bi-star ml-3 "> @Like.CountOfLike(item.IcerikID) </a>
                     }
                     else
                     {
-                        <a asp-action="CancelLike" asp-controller="Like" asp-route-id="@item.IcerikID" class="btn btn-light bi bi-star-fill ml-3"> @Like.CountOfLike(item.IcerikID) likes</a>
+                        <a asp-action="CancelLike" asp-controller="Like" asp-route-id="@item.IcerikID"  asp-route-Konuid="@i" asp-route-pageNumber="@Model.PageIndex" class="btn btn-light bi bi-star-fill ml-3"> @Like.CountOfLike(item.IcerikID)</a>
                     }
                 }
             </div>
             <div class="text-md-right mr-1 text-muted">
-                @item.IcerikTarih.ToShortDateString()
+                @item.IcerikTarih
             </div>
         </div>
     }
@@ -58,10 +60,6 @@
                 </li>
             </ul>
         </nav>
-
-        @* <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @prevDisabled">Previous</a>
-            <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-Konuid=@ViewBag.konuid class="btn btn-default @nextDisabled">Next</a>
-        *@
     </div>
 
     <br />
