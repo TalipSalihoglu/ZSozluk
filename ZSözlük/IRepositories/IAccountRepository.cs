@@ -15,5 +15,6 @@ namespace ZSözlük.IRepositories
         Task SignOutAsync();
         Task<ApplicationUser> GetApplicationUserByid(string id);
         Task<IdentityResult> EditUser(ApplicationUser userModel);
+        Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
     }
 }

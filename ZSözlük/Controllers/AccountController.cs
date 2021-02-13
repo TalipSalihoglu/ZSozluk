@@ -16,7 +16,6 @@ namespace ZSözlük.Controllers
         {
             _accountRepository = accountRepository;
         }
-        //[Route("signup")]
         public IActionResult SignUp()
         {
             return View();
@@ -108,6 +107,32 @@ namespace ZSözlük.Controllers
             user.Link_twitter = modelUser.Link_twitter;
             await _accountRepository.EditUser(user);
             return RedirectToAction("MyProfile", "Sozluk");
+        }
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result =await _accountRepository.ChangePasswordAsync(model);
+                if(result.Succeeded)
+                {
+                    ViewBag.isSuccess = true;
+                    ModelState.Clear();
+                    return View();
+                }
+                foreach (var err in result.Errors)
+                {
+                    ModelState.AddModelError("", err.Description);
+                }
+            }
+            return View(model);
         }
     }
 }
