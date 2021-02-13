@@ -67,6 +67,7 @@ namespace ZSözlük
            services.AddScoped<IIcerikService, IcerikService>();
            services.AddScoped<IKonuService, KonuService>();
            services.AddScoped<ILikeService, LikeService>();
+           services.AddScoped<IUserService, UserService>();
            services.AddScoped<UserManager<ApplicationUser>,UserManager<ApplicationUser>>();
 
            services.AddSession();
